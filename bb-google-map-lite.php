@@ -58,7 +58,7 @@ echo wp_bb_google_map_lite(array(
   'street_view_control'       => false,
   'rotate_control'            => false,
   'scale_control'             => false,
-  'fullscreen_control'        => false
+  'fullscreen_control'        => false,
 )); //
 
 ■ショートコード
@@ -79,8 +79,7 @@ class BbGoogleMapLite
 	/**
 	 * 表示
 	 */
-	public function map($args)
-	{
+	public function map($args) {
 		$args = shortcode_atts(array(
 			'key'                       => '',
 			'lat'                       => '',
@@ -102,13 +101,14 @@ class BbGoogleMapLite
 			'street_view_control'       => false,
 			'rotate_control'            => false,
 			'scale_control'             => false,
-			'fullscreen_control'        => false
+			'fullscreen_control'        => false,
 		), $args);
 
 		// パラメータチェック
 		$_err = "<p class=\"bb-gml-error\" style=\"font-size: 12px; line-height: 1.4; color: red;\">[BlankBlanc Google Map Lite]<br>Error: %s</p>\n";
-		if (empty($args['key']))
+		if (empty($args['key'])) {
 			return sprintf($_err, 'APIキー (key=APIキー) が設定されていません');
+		}
 		if (empty($args['lat']) || empty($args['lng'])) {
 			return sprintf($_err, '緯度・軽度 (lat=座標 lng=座標) が設定されていません');
 		}
@@ -122,7 +122,9 @@ class BbGoogleMapLite
 		}
 		$this->canvas[] = $args['canvas'];
 		$src = "<div id=\"{$args['canvas']}\"{$args['style']}>{$args['_title']}</div>\n";
-		if ($args['gmap_link'] === 'false') $args['gmap_link'] = false;
+		if ($args['gmap_link'] === 'false') {
+			$args['gmap_link'] = false;
+		}
 		if ($args['gmap_link']) {
 			$_title = $args['title'] ? '/' . rawurlencode($args['title']) : '';
 			$src .= "<div id=\"{$args['canvas']}-link\" class=\"new-window\"><a href=\"https://www.google.com/maps/place{$_title}/@{$args['lat']},{$args['lng']},{$args['zoom']}z\" target=\"_blank\">{$args['gmap_link']}</a></div>\n";
@@ -134,16 +136,17 @@ class BbGoogleMapLite
 	/**
 	 * JS出力
 	 */
-	function js()
-	{
-		if (empty($this->atts)) return null;
+	function js() {
+		if (empty($this->atts)) {
+			return null;
+		}
 		$_script = 'script';
 		$src = "<{$_script}>\nfunction initMap() {";
 		foreach ($this->atts as $key => $args) {
 			$args = array_map(function ($value) {
 				return is_bool($value) ? var_export($value, true) : $value;
 			}, $args);
-			$src .= <<<HTML
+			$src .= <<< HTML
 
 	/**
 	 * {$args['canvas']}
@@ -177,7 +180,7 @@ HTML;
 
 $bb_google_map_lite = new BbGoogleMapLite();
 /**
- * 呼び出し用ファンクション登録
+ * 呼び出し用ファンクション
  */
 function wp_bb_google_map_lite($args = array())
 {
