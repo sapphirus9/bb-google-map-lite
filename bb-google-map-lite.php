@@ -3,9 +3,10 @@
  * Plugin Name: BlankBlanc Google Map Lite
  * Plugin URI:
  * Description: ショートコードまたは任意のテンプレート内に Google マップを配置します
- * Version: 0.8.0
  * Author: Naoki Yamamoto
  * Author URI:
+ * Version: 0.8.0
+ * License: GPLv2 or later
  */
 
 /*
