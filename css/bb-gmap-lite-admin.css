@@ -1,0 +1,182 @@
+@charset "UTF-8";
+
+#bb-config-edit {
+	margin-top: 10px;
+}
+
+#bb-config-edit fieldset {
+	padding: 15px 0;
+	overflow: hidden;
+}
+
+#bb-config-edit .label-title {
+	position: relative;
+	top: 5px;
+	float: left;
+	display: block;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 1.2;
+	width: 240px;
+	margin-right: 20px;
+	margin-bottom: 10px;
+	overflow: hidden;
+}
+
+#bb-config-edit .label-title .note {
+	font-weight: normal;
+}
+
+#bb-config-edit .note span {
+	margin-right: 0.5em;
+}
+
+#bb-config-edit .note span::before {
+	content: "[";
+	margin-right: 0.2em;
+}
+
+#bb-config-edit .note span::after {
+	content: "]";
+	margin-left: 0.2em;
+}
+
+#bb-config-edit input {
+	vertical-align: -2px;
+}
+
+#bb-config-edit input[type=checkbox] {
+	margin-top: 7px;
+}
+
+#bb-config-edit .num-text {
+	width: 4em;
+	box-sizing: border-box;
+}
+
+#bb-config-edit .l-text {
+	width: 24em;
+	box-sizing: border-box;
+}
+
+#bb-config-edit .ll-text {
+	width: 48em;
+	box-sizing: border-box;
+}
+
+#bb-config-edit .note {
+	display: block;
+	color: #777;
+	font-size: 12px;
+	line-height: 1.6;
+	margin-top: 5px;
+}
+
+#bb-config-edit .group {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+#bb-gmap-lite-guide {
+	max-width: 640px;
+	padding: 15px;
+	margin: 15px 0 0;
+	background-color: #f8f8f8;
+	border: 1px solid #e0e0e0;
+	border-radius: 3px;
+	box-sizing: border-box;
+}
+
+#bb-gmap-lite-guide > dt {
+	font-weight: bold;
+	margin-bottom: 3px;
+}
+
+#bb-gmap-lite-guide > dt::before {
+	content: "■";
+	margin-right: 0.15em;
+}
+
+#bb-gmap-lite-guide > dd {
+	margin: 0 0 15px;
+}
+
+#bb-gmap-lite-guide > dd:last-of-type {
+	margin-bottom: 0;
+}
+
+#bb-gmap-lite-guide dl {
+	line-height: 1.8;
+	margin: 0;
+}
+
+#bb-gmap-lite-guide dl > dt {
+	float: left;
+	font-weight: bold;
+	width: 13.5em;
+}
+
+#bb-gmap-lite-guide dl > dd {
+	margin: 0;
+	overflow: hidden;
+}
+
+#bb-gmap-lite-guide .param-notice {
+	margin-top: -5px;
+}
+
+@media screen and (max-width: 767px) {
+	#bb-config-edit fieldset {
+		width: 100%;
+		border-bottom: 1px dotted #d0d0d0;
+		box-sizing: border-box;
+	}
+
+	#bb-config-edit .label-title {
+		float: none;
+		font-size: 15px;
+		width: auto;
+		margin: 0 0 15px;
+		box-sizing: border-box;
+	}
+
+	#bb-config-edit .l-text {
+		width: 99%;
+		max-width: 25em;
+	}
+
+#bb-config-edit .ll-text {
+		width: 99%;
+		max-width: 25em;
+}
+
+	#bb-config-edit .group {
+		display: block;
+		margin-right: 0;
+		margin-bottom: 8px;
+	}
+
+	#bb-config-edit .submit-btn {
+		border-bottom: none;
+	}
+
+	#bb-gmap-lite-guide dl {
+		line-height: 1.5;
+		margin: 0;
+	}
+
+	#bb-gmap-lite-guide dl > dt {
+		float: none;
+		width: auto;
+		padding-top: 10px;
+	}
+
+	#bb-gmap-lite-guide dl > dt:first-of-type {
+		padding-top: 0;
+	}
+
+	#bb-gmap-lite-guide dl > dd {
+		padding-bottom: 10px;
+		border-bottom: 1px dashed #e0e0e0;
+	}
+}
