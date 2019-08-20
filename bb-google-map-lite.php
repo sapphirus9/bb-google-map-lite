@@ -2,10 +2,10 @@
 /**
  * Plugin Name: BlankBlanc Google Map Lite
  * Plugin URI:
- * Description: ショートコードまたは任意のテンプレート内に Google マップを配置します
+ * Description: ショートコードまたは任意のテンプレート内に Google マップを配置します。（必要な API: Maps JavaScript API, Geocoding API[option]）
  * Author: Naoki Yamamoto
  * Author URI:
- * Version: 1.0.0
+ * Version: 1.0.1
  * License: GPLv2 or later
  */
 
@@ -204,7 +204,15 @@ class BbGoogleMapLite
 				return is_bool($value) ? var_export($value, true) : $value;
 			}, $atts);
 
+			$link = '';
 			if (!empty($atts['_lat']) && !empty($atts['_lng'])) { // 座標
+				if (!empty($atts['gmap_link'])) {
+					$link = <<<EOT
+
+	var link = '<a href="https://www.google.com/maps?q={$atts['lat']},{$atts['lng']}&z={$atts['zoom']}" target="_blank">{$atts['gmap_link']}</a>';
+	document.getElementById('{$atts['canvas']}-link').innerHTML = link;
+EOT;
+				}
 				$src .= <<<EOT
 
 	//
@@ -226,12 +234,17 @@ class BbGoogleMapLite
 		position: { lat: {$atts['lat']}, lng: {$atts['lng']} },
 		title: '{$atts['_title']}',
 		map: map{$key}
-	});
-	var link = '<a href="https://www.google.com/maps?q={$atts['lat']},{$atts['lng']}&z={$atts['zoom']}" target="_blank">{$atts['gmap_link']}</a>';
-	document.getElementById('{$atts['canvas']}-link').innerHTML = link;
+	});{$link}
 
 EOT;
 			} elseif (!empty($atts['address'])) { // 住所
+				if (!empty($atts['gmap_link'])) {
+					$link = <<<EOT
+
+			var link = '<a href="https://www.google.com/maps?q='+latlng+'&z={$atts['zoom']}" target="_blank">{$atts['gmap_link']}</a>';
+			document.getElementById('{$atts['canvas']}-link').innerHTML = link;
+EOT;
+				}
 				$src .= <<<EOT
 
 	//
@@ -258,9 +271,7 @@ EOT;
 				title: '{$atts['_title']}',
 				map: map{$key}
 			});
-			var latlng = results[0].geometry.location;
-			var link = '<a href="https://www.google.com/maps?q='+latlng+'&z={$atts['zoom']}" target="_blank">{$atts['gmap_link']}</a>';
-			document.getElementById('{$atts['canvas']}-link').innerHTML = link;
+			var latlng = results[0].geometry.location;{$link}
 		} else {
 			document.getElementById('{$atts['canvas']}').innerHTML = '{$this->output_err}';
 		}
@@ -290,7 +301,7 @@ EOT;
  */
 function wp_bb_google_map_lite($args = array()) {
 	global $post;
-	if (has_shortcode($post->post_content, 'wp_bb_google_map_lite')) {
+	if (isset($post->post_content) && has_shortcode($post->post_content, 'wp_bb_google_map_lite')) {
 		return;
 	}
 	$bb_gmap_lite = new BbGoogleMapLite();
@@ -373,8 +384,9 @@ class BbGoogleMapLiteAdmin
 				<div class="group">
 					<input type="text" name="bb_gmap_lite_values[key]" id="bb-gmap-lite-apikey" class="l-text" value="<?php echo esc_textarea($bb_gmap_lite_values['key']); ?>">
 				</div>
-				<div class="note">API キーは <a href="https://developers.google.com/maps/web/" target="_blank">Google Maps API</a> で設定・取得してください<br>
-					※ここで API キーを指定しない場合、使用するショートコード内で指定する必要があります</div>
+				<div class="note">API キーは <a href="https://cloud.google.com/maps-platform/" target="_blank">Google Maps API</a> で設定・取得してください<br>
+					※ここで API キーを指定しない場合、使用するショートコード内で指定する必要があります<br>
+					※必要な API: Maps JavaScript API, Geocoding API（住所 [address] 指定を行う場合）</div>
 			</fieldset>
 
 			<fieldset class="zoom">
@@ -567,14 +579,15 @@ class BbGoogleMapLiteAdmin
 			</dl>
 		</dd>
 		<dd class="param-notice">※1 key はこの設定画面またはショートコード内で必須項目<br>
-			※2 lat &amp; lng（座標） または address はショートコード内で必須項目（座標が優先）</dd>
+			※2 lat &amp; lng（座標） または address はショートコード内で必須項目（座標が優先）<br>
+			（address の利用の場合、要 Geocoding API）</dd>
 	</dl>
 </div>
 	<?php
 	}
 
 	public function add_admin() {
-		$page = add_options_page('Google マップ Lite', 'Google マップ Lite', 'edit_themes', 'bb_gmap_lite', array($this, 'input_admin'));
+		$page = add_options_page('Google マップ Lite', 'Google マップ Lite', 'install_plugins', 'bb_gmap_lite', array($this, 'input_admin'));
 		add_action('admin_head-' . $page, array($this, 'css_admin'));
 	}
 }

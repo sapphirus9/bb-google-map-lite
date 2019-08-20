@@ -10,6 +10,10 @@
 	background-color: #f5f5f5;
 }
 
+.blankblanc-google-map-lite .gml-canvas button {
+	min-width: 0 !important;
+}
+
 .blankblanc-google-map-lite .gml-canvas .not-exist {
 	display: inline-block;
 	position: relative;

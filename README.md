@@ -1,7 +1,7 @@
 # BlankBlanc Google Map Lite
 BlankBlanc Google Map Lite は WordPress プラグインです。
 プラグインの導入により、ショートコードで投稿ページや固定ページ内、または任意のテンプレート内に Google マップを配置することができます。
-※API キー は [Google Maps API](https://developers.google.com/maps/web/) で設定・取得してください。
+※API キー は [Google Maps API](https://cloud.google.com/maps-platform/) で設定・取得してください。
 
 ## パラメータの説明
 Key | Value
