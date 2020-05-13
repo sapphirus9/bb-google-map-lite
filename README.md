@@ -1,4 +1,6 @@
 # BlankBlanc Google Map Lite
+> WordPress Plugin
+
 BlankBlanc Google Map Lite は WordPress プラグインです。
 プラグインの導入により、ショートコードで投稿ページや固定ページ内、または任意のテンプレート内に Google マップを配置することができます。
 ※API キー は [Google Maps API](https://cloud.google.com/maps-platform/) で設定・取得してください。
@@ -37,7 +39,7 @@ fullscreen_control | 全画面モードコントロールの有無（true/false�
 
 ## 設置の仕方
 
-#### テンプレート等で呼び出し
+### テンプレート等で呼び出し
 ~~~php
 echo wp_bb_google_map_lite(array(
 	'key'                       => 'API_キー'
@@ -67,7 +69,7 @@ echo wp_bb_google_map_lite(array(
 <small>※ ファンクションでの呼び出しの場合、スタイルシートは追加されません<br>
 ※ 同一ページ内にショートコードが利用されている場合、ファンクションでの呼び出しは無効になります</small>
 
-###### 最小のパラメータ指定
+#### 最小のパラメータ指定
 
 ~~~php
 echo wp_bb_google_map_lite(array(
@@ -84,12 +86,12 @@ echo wp_bb_google_map_lite(array(
 
 <br>
 
-#### ショートコード
+### ショートコード
 ~~~
 [wp_bb_google_map_lite key=API_キー lat=緯度 lng=経度 address=住所 zoom=16 width=100% height=400px offset_lat=0 offset_lng=0 title=タイトル title_prefix='' title_suffix='' canvas=gml-canvas gmap_link='Google マップを開く' scrollwheel=false disable_double_click_zoom=false zoom_control=true map_type_control=false street_view_control=false rotate_control=false scale_control=false fullscreen_control=false]
 ~~~
 
-###### 最小のパラメータ指定
+#### 最小のパラメータ指定
 ~~~
 [wp_bb_google_map_lite lat=緯度 lng=経度]
 ~~~
